@@ -1,0 +1,85 @@
+{% extends 'userbase.html' %} 
+{% load static %}
+{% block title %}my orders{% endblock %}
+{% block content %}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Images made to impress</p>
+					<h1>My Orders</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- cart -->
+<div class="cart-section mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+            {% include 'user-dashboard.html' %}
+			<div class="col-12 col-lg-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-white">
+                        <strong class="d-inline-block" style="color: #fd7e14;">Your Order History</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-around">
+                            
+                            <div class="col-lg-12 px-0">
+                            {% if orders %}
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-dark">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">order #</th>
+                                        <th scope="col">Billing Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Order Total</th>
+                                        <th scope="col"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                      <tr>
+                                        <td><a style="color: #fd7e14; font-size: 16px; font-weight: 700;" href="{% url 'order-details' order.tracking_no %}">{{ order.tracking_no }}</a></td>
+                                        <td>{{order.full_name}}</td>
+                                        <td>{{order.mobile}}</td>
+                                        <td>&#8377; {{ order.total_price }}</td>
+                                        <td>
+                                            <a
+                                            href="{% url 'order-details' order.tracking_no %}"
+                                            class="btn btn-outline-light btn-sm d-flex justify-content-center align-items-center"
+                                            >
+                                            View Order
+                                        </a>
+                                        </td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                    {% else %}
+                    <div class="d-flex flex-column align-items-center">
+                        <h3 class="text-danger">You have No Orders Yet!</h3>
+                        <a class="btn amado-btn my-3" href="{% url 'shop' %}">Shop with us</a>
+                    </div>
+                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			
+		</div>
+	</div>
+	<script src="{% static 'assets/js/custom.js' %}" ></script>
+</div>
+<!-- end cart -->
+{% endblock %}

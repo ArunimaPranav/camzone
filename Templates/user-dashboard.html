@@ -1,0 +1,35 @@
+<div class="col-lg-4">
+    <div class="total-section">
+        <h3 class="mb-3 text-center ">
+            Hello <a href="{% url 'my-account' %}" style="font-size: 28px; font-weight: 600; color: #fd7e14;">{{ request.user.first_name }}</a>
+        </h3>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a class="list-group-item d-flex justify-content-center {% if '/my-account/' == request.path %} active {% endif %}"
+                    style="font-size: 16px;" href="{% url 'my-account' %}">Dashboard</a>
+            </li>
+            <li class="list-group-item">
+                <a class="list-group-item d-flex justify-content-center {% if '/my-account/my-orders/' in request.path %} active {% endif %}"
+                    style="font-size: 16px;" href="{% url 'my-orders' %}">Order History</a>
+            </li>
+            <li class="list-group-item">
+                <a class="list-group-item d-flex justify-content-center {% if '/my-account/edit-profile/' == request.path %} active {% endif %}"
+                    style="font-size: 16px;" href="{% url 'edit-profile' %}">Edit Profile</a>
+            </li>
+            <li class="list-group-item">
+                <a class="list-group-item d-flex justify-content-center {% if '/my-account/change-password/' == request.path %} active {% endif %} "
+                    style="font-size: 16px;" href="{% url 'change-password' %}">Reset Password</a>
+            </li>
+           
+        </ul>
+    </div>
+</div>
+
+<div class="product-section mt-150 mb-150">
+    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+
+       
+
+    </div>
+</div>
+

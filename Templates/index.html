@@ -1,0 +1,169 @@
+{% extends 'userbase.html' %} 
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+	<!-- hero area -->
+	<div class="hero-area hero-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<p class="subtitle">See impossible</p>
+							<h1>Think inside the Lens...</h1>
+							<div class="hero-btns">
+								<a href="{% url 'shop' %}" class="boxed-btn">Camera Collection</a>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end hero area -->
+
+
+
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				{%for product in products %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'viewproduct' product.slug %}"><img src="{{product.img.url}}" alt=""></a>
+						</div>
+						<h3 class="card-title">{{product.name}}</h3>
+						<p class="product-categorie">{{product.Categorie.Categorie_name}}</p>
+						<p class="product-price"><span>₹{{product.price}}</p>
+						<a href="{% url 'viewproduct' product.slug %}" class="cart-btn"><i class="fas fa-shopping-cart"></i>view more</a>
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+
+	<!-- cart banner section -->
+	<section class="cart-banner pt-100 pb-100">
+    	<div class="container">
+        	<div class="row clearfix">
+            	<!--Image Column-->
+            	<div class="image-column col-lg-6">
+                	<div class="image">
+                    	<!-- <div class="price-box">
+                        	<div class="inner-price">
+                                <span class="price">
+                                    <strong>30%</strong> <br> off per kg
+                                </span>
+                            </div>
+                        </div> -->
+                    	<img src="{%static 'assets/img/camimage.jpg'%}" alt="">
+                    </div>
+                </div>
+                <!--Content Column-->
+                <div class="content-column col-lg-6">
+					<h3><span class="orange-text">Deal</span> of the month</h3>
+                    <h4>Alpha 1 with superb resolution and speed</h4>
+                    <div class="text">Sony continues to challenge the limits of conventional imaging tools with innovative technology that delivers an unprecedented combination of resolution and speed plus intuitive operation. The α1 offers new dimensions of imaging performance as well as efficient workflow, giving the user new creative freedom.</div>
+                    <!--Countdown Timer-->
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                	<a href="{% url 'shop' %}" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Shop now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end cart banner section -->
+
+
+	
+
+	
+	<!-- shop banner -->
+	<section class="shop-banner">
+    	<div class="container">
+        	<h3>December sale is on! <br>Discover more<span class="orange-text">with Camzone...</span></h3>
+            <div class="sale-percent"><span>Big on quality,<br>small on size</span>ZOOM<span>Across Genres</span></div>
+            <a href="{% url 'shop' %}" class="cart-btn btn-lg">Shop Now</a>
+        </div>
+    </section>
+	<!-- end shop banner -->
+
+	<!-- latest news -->
+	<div class="latest-news pt-150 pb-150">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> News</h3>
+						<p>Use a tilting monitor to capture your world from a different perspective. </p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">See the world from a different angle</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> Admin</span>
+								<span class="date"><i class="fas fa-calendar"></i> 15 June, 2022</span>
+							</p>
+							<p class="excerpt">
+								Whether you are an adrenaline-freak or a vlogger, this dual-screen Osmo camera from DJI will be a perfect addition to your adventure kit. Powered by the RockSteady stabilization technology, this Osmo camera can capture sharp photos and videos of sports, travel, or daily life.</p>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Dramatic images in any environment</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> Admin</span>
+								<span class="date"><i class="fas fa-calendar"></i> 15 June, 2022</span>
+							</p>
+							<p class="excerpt">Arresting images don't wait for a second chance, especially in challenging light. A Sony mirrorless camera, with far larger image sensor and bright lenses, makes better use of the light you have. Fast focusing and a wider dynamic range can turn difficult into beautiful.</p>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+					<div class="single-latest-news">
+						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Darkness is no excuse for a bad photo</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> Admin</span>
+								<span class="date"><i class="fas fa-calendar"></i> 15 June, 2022</span>
+							</p>
+							<p class="excerpt">Searching for the best mirrorless camera you can buy?  we’ve tested all of the top mirrorless options available in 2022. So whether you’re upgrading from your current mirrorless camera or switching from a DSLR, this buying guide will help you find the right one for you.</p>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- end latest news -->
+{% endblock %}
+	

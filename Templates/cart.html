@@ -1,0 +1,110 @@
+{% extends 'userbase.html' %} 
+{% load static %}
+{% block title %}cart{% endblock %}
+{% block content %}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Images made to impress</p>
+					<h1>Cart</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- cart -->
+<div class="cart-section mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-12">
+				<div class="cart-table-wrap">
+					<table class="cart-table">
+						<thead class="cart-table-head">
+							<tr class="table-head-row">
+								<th class="product-remove"></th>
+								<th class="product-image">Product Image</th>
+								<th class="product-name">Name</th>
+								<th class="product-price">Price</th>
+								<th class="product-quantity">Quantity</th>
+								<th class="product-total">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in cart %}
+							<tr class="table-body-row product_data">
+								<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+								<td class="product-image"><img src="{{item.product.img.url}}" alt="IMG"></td>
+								<td class="product-name">{{item.product.name}}</td>
+								<td class="product-price">₹{{item.product.price}}</td>
+								<!-- <td class="product-quantity"><input type="number" placeholder="0"></td> -->
+								<td class="product-quantity d-flex justify-content-center"><div class="wrap-num-product flex-w m-l-auto m-r-0">
+									{% csrf_token %}
+									<input type="hidden" value="{{item.product_id}}" class="prod_id">
+									<div class="d-flex" style=" width:150px;">
+										<a href="{% url 'removecart' item.product_id %}" class=" btn input-group-text ">-</a>
+										
+										<input type="text" name="quantity" class="form-control qty-input text-center" value="{{item.quantity}}">
+										<a href="{% url 'addquantity' item.product_id %}" class=" btn input-group-text ">+</a>
+									</div>
+									</div></td>
+
+								<!-- <td class="product-total"><button class="delete-cart-item  badge badge-sm bg-gradient-danger" >REMOVE</button></td> -->
+								<td class="product-total"><a class="badge badge-sm bg-gradient-danger" href="{% url 'delete-cart' item.product.id%}">REMOVE</a></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="total-section">
+					<table class="total-table">
+						<thead class="total-table-head">
+							<tr class="table-total-row">
+								<th>Total</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr class="total-data">
+								<td><strong>Subtotal: </strong></td>
+								<td>$500</td>
+							</tr> -->
+							<tr class="total-data">
+								<td><strong>Shipping: </strong></td>
+								<td>Free</td>
+							</tr>
+							<tr class="total-data">
+								<td><strong>Total: </strong></td>
+								<td>₹{{total}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="cart-buttons">
+						
+						<a href="{% url 'checkout' %}" class="boxed-btn black">Check Out</a>
+					</div>
+				</div>
+
+				<!-- <div class="coupon-section">
+					<h3>Apply Coupon</h3>
+					<div class="coupon-form-wrap">
+						<form action="index.html">
+							<p><input type="text" placeholder="Coupon"></p>
+							<p><input type="submit" value="Apply"></p>
+						</form>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<script src="{% static 'assets/js/custom.js' %}" ></script>
+</div>
+<!-- end cart -->
+{% endblock %}

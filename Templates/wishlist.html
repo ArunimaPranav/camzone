@@ -1,0 +1,50 @@
+{% extends 'userbase.html' %} 
+{% load static %}
+{% block title %}Wishlist{% endblock %}
+{% block content %}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Images made to impress</p>
+					<h1>Change Password</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+    <!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				{%for item in wishlists %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'viewproduct' item.product.slug %}"><img src="{{item.product.img.url}}" alt=""></a>
+						</div>
+						<h3 class="card-title">{{item.product.name}}</h3>
+						<!-- <p class="product-categorie">{{product.Categorie.Categorie_name}}</p>
+						<p class="product-price"><span>₹{{product.price}}</p> -->
+						<a href="{% url 'viewproduct' item.product.slug %}" class="cart-btn">view </a>
+                        <a href="{% url 'delete-wishlist' item.product.id %}" class="cart-btn"></i>Remove</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+    {% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'userbase.html' %} 
+{% load static %}
+{% block title %}Payment{% endblock %}
+{% block content %}
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Images made to impress</p>
+					<h1>Cart</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- cart -->
+<div class="cart-table-area section-padding-100 pt-5">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="cart-title mt-50">
+                    <h2>Payments</h2>
+                </div>
+
+                <div class="cart-table clearfix">
+                    <div class="card my-3">
+                        <h5 class="card-header">Billing Address</h5>
+                        <div class="card-body">
+                            <p class="card-text">Name : {{ order.full_name }}</p>
+                            <p class="card-text">Address : {{ order.address }}</p>
+                            <p class="card-text">mobile Number : {{ order.mobile }}</p>
+                            <p class="card-text">City : {{ order.city }}</p>
+                            <p class="card-text">Pin code : {{ order.pin_code }}</p>
+                            <p class="card-text">State : {{ order.state }}</p>
+                            <p class="card-text">Country : {{ order.country }}</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-8 col-md-12">
+                        <div class="cart-table-wrap">
+                            <div class="card">
+                                <div class="card-header"  >
+                                    <h4>Review Products</h4>
+                                </div>
+                                <table class="order-details">
+                                    <thead>                                              
+                                    </thead>
+                                    <tbody class="order-details-body">
+                                        
+                                        <tr>
+                                            <td>image</td>
+                                            <td>Product</td>
+                                            <td>Quantity</td>
+                                            <td>Price</td>
+        
+                                        </tr>
+                                        {% for cart_item in cart_items %}
+                                        <tr>
+                                            <td><img src="{{cart_item.product.img.url}}" alt=""></td>
+                                            <td>{{cart_item.product.name}}</td>
+                                            <td>{{cart_item.quantity}}</td>
+                                            <td>{{cart_item.product.price}}</td>
+                                        </tr>
+                                        {% endfor %}	
+                                    </tbody>
+                                    </tbody>
+                                </table>
+                               
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                    <form action="{% url 'payments' %}" method="POST">
+                        {% csrf_token %}
+                        <h5 class="text-center">Cart Total</h5>
+                        <ul class="summary-table px-1">
+                            <li>
+                                <span>Total : </span>
+                                <span>&#8377; {{ total }}</span>
+                            </li>
+                            <li>
+                                <span>Tax : </span>
+                                <span>&#8377; {{ tax }}</span>
+                            </li>
+                            <li>
+                                <span>Grand Total : </span>
+                                <span>&#8377; {{ grand_total }}</span>
+                            </li>
+                        </ul>
+                        <div class="cart-btn mt-100">
+                            <button class="btn btn-primary boxed-btn black" type="submit">Online Payment</button>
+                            
+                        </div>
+                    </form>
+                    <div class="boxed-btn mt-3">
+                        <form action="{% url 'cash-on-delivery' %}" method="POST">
+                            {% csrf_token %}
+                            <button onclick="sweetalertclick()" class="btn btn-success boxed-btn black" >Cash On Delivery</button>
+                        </form>
+                    </div>
+                    <!--  -->
+                    {% if payment %}
+                    <form class="mt-4" action="{% url 'payment-status' %}" method="POST">
+                        {% csrf_token %}
+                        <script
+                            src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="rzp_test_9dZdkvIzTMtvp7" 
+                            data-amount="{{ payment.amount }}" 
+
+                            data-currency="{{ payment.currency }}"// You can accept international payments by changing the currency code. Contact our Support Team to enable International for your account
+
+                            data-order_id="{{ payment.id }}"// Replace with the order_id generated by you in the backend.
+
+                            data-buttontext="Pay with Razorpay"
+
+                            data-name="Camzone"
+
+                            data-description="See the world from a different angle."
+
+                            data-image="{% static 'img/core-img/logo-1.png' %}"
+                            data-prefill.name="{{ payment.name }}"
+                            data-prefill.email="{{ payment.email }}"
+                            data-theme.color="#fbb710"
+                        ></script>
+                        <input type="hidden" custom="Hidden Element" name="hidden">
+                    </form>
+                    {% endif %}
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function sweetalertclick(){
+        swal({
+            title: "ORDER PLACED!",
+            text: "Thank You, keep shopping with us!",
+            icon: "success",
+
+            })
+
+            setTimeout(()=>{
+                window.location.href='http://127.0.0.1:8000/'
+            },10000)
+    }
+</script>
+{% endblock %}
