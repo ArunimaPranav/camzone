@@ -92,7 +92,7 @@
 			</div>
 		</div>
 	</div>
-
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="{% static 'assets/js/custom.js' %}" ></script>
 	<script>
 		$(document).on('click','#add-to-cart', function  (e) {
@@ -109,7 +109,7 @@
 					action : 'POST', 
 				},
 				success : function (json) {
-					
+					swal(json.status)
 						},
 				error : function (xhr, errmsg, err) {}
 			});

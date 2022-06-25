@@ -44,11 +44,11 @@
 				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="{{product.img.url}}" alt=""></a>
+							<a href="{% url 'viewproduct' product.slug %}"><img src="{{product.img.url}}" alt=""></a>
 						</div>
 						<h3>{{ product.name }}</h3>
 						<p class="product-price">₹ {{product.price}} </p>
-						<a href="{% url 'viewproduct' product.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<a href="{% url 'viewproduct' product.slug %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
 				{% endfor %}
